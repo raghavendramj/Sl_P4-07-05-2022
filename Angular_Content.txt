@@ -31,8 +31,7 @@ node -v
 		-> It will ask for routing -> y
 		-> what css you want -> css (default - Press Enter)
 	
-	cd angular-app
-	
+	cd angular-app	
 	open tsConfig.json and only modify strict -> false
 		{
 			"compilerOptions": { 
@@ -40,7 +39,21 @@ node -v
 			}
 		}
 		npm start
-			
+		
+	adding bootstrap to angular
+		->	npm install bootstrap
+		-> 	npm install jquery
+		-> 	add the line to styles.css => @import "~bootstrap/dist/css/bootstrap.css"
+		
+	add the new nested component
+		ng generate component components/home
+		
+		ng generate component components/header/header
+		Creates 4 files..
+			header.component.ts 			-> Business Logic
+			header.component.html 		-> Template Code
+			header.component.css 			-> Styling Changes
+			header.component.spec.ts 	-> Unit testing File
 	
 	
 	
