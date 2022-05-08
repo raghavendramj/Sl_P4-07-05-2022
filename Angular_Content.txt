@@ -1,13 +1,13 @@
 node -v
 	-> some version -> v14.15.0
-	if no 
+	if no
 		-> download the nodeJs and install
 	npm install -g npm (node package manager)
 	npm install -g @angular/cli@latest
-	
+
 	ng --version
-	
-		Angular CLI: 13.1.2       
+
+		Angular CLI: 13.1.2
 		Node: 14.15.0
 		Package Manager: npm 8.5.5
 
@@ -17,45 +17,108 @@ node -v
 		@angular-devkit/core         13.1.2 (cli-only)
 		@angular-devkit/schematics   13.1.2 (cli-only)
 		@schematics/angular          13.1.2 (cli-only)
-		
+
 	Visual Studio Code
 	https://code.visualstudio.com/
-	
+
 	mkdir AngularApps
 	cd AngularApps
-	
+
 	Create first angular project
 	------------------------------
-	
+
 	ng new angular-app
 		-> It will ask for routing -> y
 		-> what css you want -> css (default - Press Enter)
-	
-	cd angular-app	
+
+	cd angular-app
 	open tsConfig.json and only modify strict -> false
 		{
-			"compilerOptions": { 
-					"strict": false 
+			"compilerOptions": {
+					"strict": false
 			}
 		}
-		npm start
-		
-	adding bootstrap to angular
+		npm start -> Bring up the application
+		Open any browser :- http://localhost:4200/ -> You will see a angular page.
+
+		Open app.component.html -> remove everything and paste -> <h1> Welcome to Angular </h1>
+		Open any browser :- http://localhost:4200/ -> You will see  -> Welcome to Angular
+
+	Adding bootstrap to application
 		->	npm install bootstrap
 		-> 	npm install jquery
 		-> 	add the line to styles.css => @import "~bootstrap/dist/css/bootstrap.css"
-		
+
 	add the new nested component
-		ng generate component components/home
-		
-		ng generate component components/header/header
+		ng generate component components/home/home -> generate a new component
 		Creates 4 files..
-			header.component.ts 			-> Business Logic
-			header.component.html 		-> Template Code
-			header.component.css 			-> Styling Changes
-			header.component.spec.ts 	-> Unit testing File
-	
-	
-	
-	
-	
+			home.component.ts 			-> Business Logic
+			home.component.html 		-> Template Code
+			home.component.css 			-> Styling Changes
+			home.component.spec.ts 	-> Unit testing File
+
+
+Data Interactions.
+--------------------
+4 Types Data Bindings
+
+1. One Way Binding
+		Data flows from Component to Template(HTML)
+			1. Interpolation
+			2. Property Binding
+				a. Class Binding
+				b. Style Binding
+				c. Attribute binding
+			3. Event Binding
+2. Two Way Binding
+----------------------------------------------------------------------------------
+One Way Binding :- Interpolation
+		Data flows from Component to Template(HTML)
+		Component -> title = 'Angular'
+		Template -> Welcome to {{title}} = o/p =>  Welcome to Angular
+
+----------------------------------------------------------------------------------
+One Way Binding :- Property Binding
+		Data flows from Component to Template(HTML)
+		Component -> isDisabled = false
+		Template -> [disabled]="isDisabled"
+----------------------------------------------------------------------------------
+One Way Binding :- Event Binding
+		Data flows from Template(HTML) to Component
+		Template -> (click) = enableUsername()
+		Component -> enableUsername() -> update isDisabled's value.
+----------------------------------------------------------------------------------
+Two Way Binding :- Property Binding + Event Binding
+	-> [] + () => [(ngModel)]
+
+	To make this work
+	-> open app.module.ts and make 2 changes
+		(1) import { FormsModule } from '@angular/forms';
+		@NgModule({
+		  declarations: [
+			....
+		  ],
+		  imports: [
+			(2) FormsModule
+		  ],
+		})
+----------------------------------------------------------------------------------
+Class Binding
+	Only One Class
+		HTML -> [class]="onlyOneClass"
+		Component  ->public onlyOneClass: string = 'oneBoldClass';
+		CSS  ->.oneBoldClass{font-weight: bold}
+
+	Only Multiple  Classes
+		HTML -> [class]="multipleClasses"
+		Component  ->public   multipleClasses = ['mulitBolder', 'multiFonter', 'multiItalic']
+		CSS  ->.mulitBolder{ font-weight: bold; }  .multiFonter{ font-size: 30px; }  .multiItalic{ font-style: italic; }
+
+	Applying class based on variable
+		HTML ->[class.blueColor]="applyBlueColor"
+		Component  ->public  applyBlueColor: boolean = false;
+		CSS  ->.blueColor{color: blue;}
+----------------------------------------------------------------------------------
+Style Binding
+	HTML -> [style]="customStyle"
+	Component  ->   public customStyle:string = 'color:blue; font-size: 30px; text-decoration:line-through'; 
