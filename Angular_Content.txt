@@ -121,4 +121,21 @@ Class Binding
 ----------------------------------------------------------------------------------
 Style Binding
 	HTML -> [style]="customStyle"
-	Component  ->   public customStyle:string = 'color:blue; font-size: 30px; text-decoration:line-through'; 
+	Component  ->   public customStyle:string = 'color:blue; font-size: 30px; text-decoration:line-through';
+----------------------------------------------------------------------------------
+Component to Component Interaction
+Case 1:- Parent to Child
+--------------------------
+	Parent Component :-
+		Component  ->   public inputMessage:string = 'I am from parent';
+		HTML -> [childMessage]="inputMessage"
+
+	Child 	 :-
+		Component  ->   @Input() childMessage: string = '';
+		HTML -> <p>{{ childMessage }}</p>
+
+	Flow
+		-> Parent's Component(inputMessage)
+		-> Parent's Template([childMessage]="inputMessage")
+		-> Child's Component(@Input() childMessage)
+		-> Child's Template({{ childMessage }})
