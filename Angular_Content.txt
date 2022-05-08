@@ -1,0 +1,48 @@
+node -v
+	-> some version -> v14.15.0
+	if no 
+		-> download the nodeJs and install
+	npm install -g npm (node package manager)
+	npm install -g @angular/cli@latest
+	
+	ng --version
+	
+		Angular CLI: 13.1.2       
+		Node: 14.15.0
+		Package Manager: npm 8.5.5
+
+		Package                      Version
+		------------------------------------------------------
+		@angular-devkit/architect    0.1301.2 (cli-only)
+		@angular-devkit/core         13.1.2 (cli-only)
+		@angular-devkit/schematics   13.1.2 (cli-only)
+		@schematics/angular          13.1.2 (cli-only)
+		
+	Visual Studio Code
+	https://code.visualstudio.com/
+	
+	mkdir AngularApps
+	cd AngularApps
+	
+	Create first angular project
+	------------------------------
+	
+	ng new angular-app
+		-> It will ask for routing -> y
+		-> what css you want -> css (default - Press Enter)
+	
+	cd angular-app
+	
+	open tsConfig.json and only modify strict -> false
+		{
+			"compilerOptions": { 
+					"strict": false 
+			}
+		}
+		npm start
+			
+	
+	
+	
+	
+	
