@@ -140,6 +140,9 @@ Case 1:- Parent to Child
 		-> Child's Component(@Input() childMessage)
 		-> Child's Template({{ childMessage }})
 
+Case 2:- Child to Parent 
+--------------------------
+
 
 Angular Directives
 
@@ -212,7 +215,57 @@ custom pipe
 
 
 Agenda - 15-05-2022
+	Sevices and Dependecy Injection
+	Routing and Navigation
+	Child to Parent component communication
+	Angular Forms
+		Template Driven
+		Reactive Forms
+	
+	Introduction to 
+		Angular Material
+		Prime NG
+
+Services
+	-> post-Services -> Service
+		getPosts()-> https://jsonplaceholder.typicode.com/todos/
+		[{ "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false }]
+
+------------------
+HTTP Methods
+------------------
+GET		-> perform all read operations -> select * from todos;
+POST	-> save an entry/row in the database -> insert into todos(id, title, completed) values(1, 'welcome', true);
+DELETE	-> remove an entry/row from the database -> delete from todos where id=1;
+PUT		-> update an entry/row in the database -> alter the data (direct update/ delete+create)
 
 
+Routing	
+-------
 
+Step 1:-
+During creation of project -> 
+	ng new angular-app
+		-> It will ask for routing -> y
+		-> what css you want -> css (default - Press Enter)
+
+Step 2:- Configure Routes
+	const routes: Routes = [
+		{ path: 'home', component: HomeComponent },
+		{ path: 'pipes', component: BuiltInPipesComponent },
+		{ path: 'directives', component: StructuralComponent },
+		{ path: '', redirectTo: '/home', pathMatch: 'full' },
+		{ path: '**', component: PageNotFoundComponent },
+	];
+
+Step 3:-
+	app.component.html
+		add <router-outlet></router-outlet> 
+	Example :- 
+		http://localhost:4200/directives -> StructuralComponent
+		http://localhost:4200/home -> HomeComponent
+		http://localhost:4200/pipes -> BuiltInPipesComponent
+Step 4:-
+	If we want to make the different routes as link
+	 <a routerLink="/structural">Structural</a>
 
