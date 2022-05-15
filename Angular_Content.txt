@@ -139,3 +139,80 @@ Case 1:- Parent to Child
 		-> Parent's Template([childMessage]="inputMessage")
 		-> Child's Component(@Input() childMessage)
 		-> Child's Template({{ childMessage }})
+
+
+Angular Directives
+
+Normal attributes what we have
+ -> class, id, disabled, href, action.... HTML element attribiutes
+ -> (click), ngModel, ngFor -> Angular Compiler [class], [style], [disabled] -> Only understood by Angular Compiler
+
+Structural Directives
+Its used to add/remove DOM Elements in the current HTML Document.
+
+ngIf
+ngFor
+ngSwitch
+ngCase
+....
+
+CMD:- ng g c components/directive-usage/structural/
+
+*ngIf 
+	-> HTML -> *ngIf="people.length > 0"
+	-> TS -> people: Person[] = [];
+
+	HTML 
+		*ngIf="isUserLoggedIn; else showLoggedOutMessage"
+		ng-template #showLoggedOutMessage
+	TS	
+		public isUserLoggedIn = false;
+  		public showLoggedOutMessage = true;
+*ngFor
+	HTML -> *ngFor="let person of people; trackBy: trackByPerson; let i = index"
+	TS -> people: Person[] = [];
+
+ngSwitch
+	[ngSwitch]="loginName"
+	*ngSwitchCase="'user'"
+	*ngSwitchDefault
+
+Attribute Directives
+	ngStyle
+	ngClass
+	ngModel
+
+CMD:- ng g c components/directive-usage/attribute
+
+ngStyle
+	[ngStyle]="{'font-size': '25px', color: getColor(name)}"
+
+ngClass	
+	HTML  [ngClass]="{ highlight: odd }" 
+	CSS  .highlight : {color: red}
+
+Custom Directives
+	CMD:- ng generate directive customstyle
+
+	selector -> appCustomStyle
+	constructor(el: ElementRef) {
+		el.nativeElement.style.fontSize = '50px';
+		el.nativeElement.style.backgroundColor = 'gray';
+	}
+
+Pipes :-
+	date
+	currency
+	slice
+	json
+
+	CMD:- ng g c components/pipes/built-in-pipes
+custom pipe
+	CMD:- ng g pipe digitcount 
+
+
+Agenda - 15-05-2022
+
+
+
+
