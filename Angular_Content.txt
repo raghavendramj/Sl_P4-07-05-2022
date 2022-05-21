@@ -142,6 +142,26 @@ Case 1:- Parent to Child
 
 Case 2:- Child to Parent 
 --------------------------
+	1. Child Component
+		Component
+			@Output() childOutput : EventEmitter<string> = new EventEmitter();
+			msgToParent: string = '';
+			sendToParent(){
+				this.childOutput.emit(this.msgToParent);
+			}
+		Template
+			<input type="text" [(ngModel)]="msgToParent" class="form-control" />
+			<button class="btn btn-primary mt-3" (click)="sendToParent()">Send to Parent</button>
+
+	2. Parent Component
+		Component
+			myChildMessage:string="";
+			getChildData(data){
+				myChildMessage = data;
+			}
+		Template
+			<app-child  (childOutput) ="getChildData($event)" ></app-child>
+			 <p>Value Passed to child is : {{ inputMessage }}</p>
 
 
 Angular Directives
@@ -211,7 +231,7 @@ Pipes :-
 
 	CMD:- ng g c components/pipes/built-in-pipes
 custom pipe
-	CMD:- ng g pipe digitcount 
+	CMD:- ng g pipe pipes/digitcount
 
 
 Agenda - 15-05-2022
@@ -268,4 +288,45 @@ Step 3:-
 Step 4:-
 	If we want to make the different routes as link
 	 <a routerLink="/structural">Structural</a>
+
+
+Template Driven forms
+	1. form -> 
+		#contactForm="ngForm"  -> object which contains all the fields info
+		(ngSubmit)="submitFields(contactForm)" -> used for overall field validation
+	2. for every field -> have ngModel attribute
+	3. If you want to validate and show some custom message right next field
+		Create a template variable -> #password="ngModel"
+		  	<div class="alert alert-danger" *ngIf="password.invalid">
+                Please enter minlength of 3 characters to proceed
+            </div>
+			
+			
+			
+
+Parent to child component communication :-
+   Parent
+      -> TS -> fromParentMsg
+      -> HTML -> <app-child [toChildMsg]="fromParentMsg"></app-child>
+   Child
+      -> TS ->   @Input() toChildMsg = '';
+      -> HTML -> {{toChildMsg}}
+
+Child to Parent component communication :-
+   Child
+      -> HTML -> button -> (click)="sendMyMsg()"
+      -> TS ->  
+            @Output()  childEventObject: EventEmitter<string> = new EventEmitter();
+              sendMyMsg(){
+                  this.childEventObject.emit("Hey buddy this is from chid");
+              }
+   Parent   
+      -> HTML 
+         <app-child (childEventObject)="getChildMsg($event)"></app-child>
+         {{receivedFromChild}}
+      -> TS  
+         receivedFromChild 
+         getChildMsg(data){
+            this.receivedFromChild = data;
+         }
 
