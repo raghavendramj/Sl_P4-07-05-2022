@@ -1,0 +1,76 @@
+Agenda :-
+
+1. Revision
+2. Full Stack Application (ONLY IF INTERSTED)
+3. Phase End Project
+
+BackEnd
+	-> Spring Boot Project
+	-> Spring Data JPA
+	-> MySQL(Database)
+
+
+Layers:-
+	Data Access Layer
+		@Entity
+		Employee
+			-> id, firstName, lastName, emailId
+
+		@Repository
+		By Default:- findAll, save, update delete, findById....
+		EmployeeRepository extends JPARepository<Employee, Long>
+			findByFirstNameAndLastName(String firstName, String lastName);
+
+	Service Layer
+		@Service
+		EmployeeService(I) -> CRUD
+
+		//CREATE
+		Employee saveEmployee(Employee employee);
+
+		//READ
+		List<Employee> getEmployees();
+		Employee getEmployeeById(Long id);
+		Employee getEmployeeByName(String firstName, String lastName);
+
+		//UPDATE
+		Employee updateEmployee(Employee employee, Long id);
+
+		//DELETE
+		Employee deleteEmployee(Long id);
+
+	Controller Layer
+		@RestController("/employees")
+
+		@PostMapping
+		Employee createEmployee(@RequestBody Employee employee)
+
+		@GetMapping
+		List<Employee> fetchEmployees()
+
+		@GetMapping("/{id}")
+		Employee fetchEmployeeById(@PathVariable  Long id);
+
+		@GetMapping("/searchByName/")
+		Employee fetchEmployeeById(@RequestParam String firstName, @RequestParam String lastName);
+
+		@PutMapping("/{id}")
+		Employee udpateEmployee(@RequestBody Employee employee, @PathVariable  Long id)
+
+		@DeleteMapping("/{id}")
+		Employee udpateEmployee(@PathVariable  Long id)
+		
+		
+		http://localhost:8084/employees/searchByName?firstName=Ricky&lastName=Pointing
+		
+		http://localhost:8084/employees/2
+		
+		http://localhost:8084/employees
+
+
+Angular 
+	-> Service
+		-> fetch all the employees
+	-> Table
+			-> 4 Fields
+			-> display fetched fields
