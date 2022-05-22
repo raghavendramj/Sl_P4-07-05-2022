@@ -1,0 +1,143 @@
+Angular Topics Covered :-
+
+1. Installation
+   1. Visual Studio Code 
+   2. Node Package Manager -> npm install -g npm (node package manager)
+   3. Angular -> 	npm install -g @angular/cli@latest
+   4. Bootstrap -> 
+        i. npm install bootstrap + add the line to 
+        ii. styles.css => @import "~bootstrap/dist/css/bootstrap.css"
+   5. Jquery -> npm install jquery
+   6. tsConfig.json -> compilerOptions : {"strict": false}
+
+2. Creating the project
+   1. mkdir AngularApps 
+   2. cd AngularApps
+   3. create new angular project -> ng new angular-app
+     i. Would you like to add Angular routing? (y/N)  Y
+     ii.Which stylesheet format would you like to use? (Use arrow keys) -> CSS
+   4. included bootstrap and Jquery
+   5. started the project -> npm start
+   6. The application will be lauched with default page :- 
+      URL ->  http://localhost:4200
+
+3. Creating the various items in angular
+   1. Creating a component.
+      CMD:-  ng generate component components/home
+      SHORT CMD:-  ng g c components/home
+      Creates 4 files..
+        home.component.ts 			-> Business Logic
+        home.component.html 		-> Template Code / UI 
+        home.component.css 			-> Styling Changes
+        home.component.spec.ts   	-> Unit testing File
+    2. Creating a service
+        CMD :- ng g s service/posts
+        Creates 2 files..
+            posts.service.ts          -> Business Logic
+            posts.service.sepec.ts    -> Unit testing File
+    3. Creating a custom directive
+        CMD :- ng g d directives/customstyle
+        selector: '[appCustomStyle]'
+    4. Create a custom pipes
+        CMD :- ng g pipe pipes/digitcount
+
+4. Explored many concepts in angular
+   1. Data Interactions
+      1. One Way Binding
+         1. Interpolation -> {{title}}
+         2. Property Binding -> [disabled]
+            i. Class Binding -> 
+               i. Only one class -> [class]="bolderText" (css -> .bolderText)
+               ii. Multiple Classes -> [class]="moreClasses" -> moreClasses = ['class1', 'class2'];
+               iii. [class.blueColor]='applyBlueColor' (css -> .blueColor:{color: blue})
+            ii. Style Binding -> [style] = 'myStyle' (TS -> myStyle = 'color:blue; font-size: 30px;')
+            iii. ngClass -> provides custom implementation  -> [ngClass]={highlight: getClass()}
+            iv.  ngStyle -> provides custom implementation ->  [ngStyle]="color: getColor(name)"
+         3. Event Binding -> (click)='getData()'
+      2. Two Way Binding -> () + [] => [(ngModel)]
+      3. Component Binding
+         Parent to Child -> 
+            Parent -> TS -> parentMsg -> 'I am from parent'
+            Parent -> HTML -> [childMsg] = "parentMsg"
+            Child -> TS -> @Input childMsg
+            Child -> HTML -> {{childMsg}}
+            
+
+         Child to Parent ->
+            Child -> HTML -> Event -> (click) -> sendToParent() <SEND MSG TO PARENT>
+            Child -> TS -> 
+               @Output 
+               fromChildMsg: EventEmitter<string>= new EventEmitter();
+               msgToParent = 'I am from child';
+               sendToParent(){
+                  this.fromChildMsg.emit(msgToParent);
+               }
+            Parent -> 
+               HTML -> <app-child (fromChildMsg)="getMsgFromChild($event)"></app-child>
+               TS -> getMsgFromChild(event){
+                        console.log(event); -> //'I am from child'
+                     } 
+
+5. RxJS
+   -> map, filter and reduce in this..
+
+6. Services and Injectables
+   -> How to make HTTP Requests
+   GET		-> perform all read operations -> select * from todos;
+   POST	   -> save an entry/row in the database -> insert into todos(id, title, completed) values(1, 'welcome', true);
+   DELETE	-> remove an entry/row from the database -> delete from todos where id=1;
+   PUT		-> update an entry/row in the database -> alter the data (direct update/ delete+create)
+
+7. Directives
+   1. Structral Directives
+      ngIf, ngFor, ngSwitch, ngCase, ngDefault...
+   2. Attribute Directives
+      i.   ngClass -> provides custom implementation  -> [ngClass]={highlight: getClass()}
+      ii.  ngStyle -> provides custom implementation ->  [ngStyle]="color: getColor(name)"
+      iii. ngModel -> [(ngModel)] -> Used for two way binding. 
+   3. Custom Directives
+      CMD:- ng generate directive customstyle
+      selector -> appCustomStyle
+
+8. Angular pipes
+   Built-In Pipes
+   	date
+      currency
+      slice
+      json
+   Custom Pipes
+      -> CMD:- ng g pipe pipes/digitcount
+9. Routing and Navigation
+   const routes: Routes = [
+      { path: '', redirectTo: '/home', pathMatch: 'full' }, -> DEFAULT
+      { path: 'home', component: HomeComponent }, 
+      { path: '**', component: PageNotFoundComponent } -> incorrect paths will take to PNF
+   ]
+10. Angular Forms
+    1. Template Drive Forms
+       i.   #contactForm="ngForm"  -> object which contains all the fields info
+       ii.  for every field -> have ngModel attribute
+       iii. Create a template variable -> #password="ngModel"
+
+   2. Reactive Forms
+      i.   [formGroup]="myReactiveForm" (ngSubmit)="submitForm(myReactiveForm.value)"
+      ii.  formControlName="username"
+      iii. control the submit btn -> [disabled]="myReactiveForm.invalid"
+      iv. myReactiveForm.get('username').valid, 
+          myReactiveForm.get('username').dirty
+          myReactiveForm.get('username').touched
+          
+Angular Material :-
+   Add ng add @angular/material
+   The package @angular/material@13.3.7 will be installed and executed.
+   ? Would you like to proceed? (Y/n) -> Y
+   ? Choose a prebuilt theme name, or "custom" for a custom theme: (Use arrow keys)  -> Indigo/pink
+   ? ? Set up global Angular Material typography styles? (y/N) y
+   ? Set up browser animations for Angular Material? (Y/n) y   
+        
+   angular.module.ts
+   imports : [
+      MatTableModule,
+      MatButtonModule,
+      MatIconModule
+   ]
